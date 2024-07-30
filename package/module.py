@@ -35,7 +35,7 @@ class CFToolsClient:
                 if state and state['login'] == 1:
                     return await func(self, *args, **kwargs)
                 else:
-                   raise Exception()
+                   raise Exception('Authentication error')
 
         return wrapper
 
@@ -48,7 +48,7 @@ class CFToolsClient:
         acsrf_token = await self.__get_acsrf_token()
         
         if not self.login or not self.password:
-            raise Exception()
+            raise Exception('Login or password is not provided')
         
         password_bytes = self.password.encode('utf-8')
         sha256_hash = hashlib.sha256()
